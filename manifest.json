@@ -1,0 +1,17 @@
+{
+  "name": "Binance Profit Calc",
+  "description": "Calculates profit and loss, average price in the Order History",
+  "version": "0.1.0",
+  "content_scripts": [
+    {
+      "matches": ["https://*.binance.com/*tradeHistory*"],
+      "js": ["jquery-3.3.1.js","script.js"]
+    }
+  ],
+  "manifest_version": 2,
+  "icons":{
+  	"16": "binance-coin-logo.png",
+    "48": "binance-coin-logo.png",
+    "128": "binance-coin-logo.png"
+  }
+}
