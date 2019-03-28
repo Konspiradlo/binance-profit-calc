@@ -4,9 +4,6 @@ $(document).ready(function () {
 
 });
 
-$( document ).ajaxComplete(function() {
-    alert( "Triggered ajaxComplete handler." );
-});
 
 function listenForChangesAndReCalculate() {
     $("tbody").one("DOMSubtreeModified", function () {
@@ -72,7 +69,8 @@ function calculate() {
                 '<td>' + formatPrice(value.buyPrice) + '<br />' + formatPrice(value.sellPrice) + '</td>' +
                 '<td>' + formatQuantity(value.buyQuantity) + '<br />' + formatQuantity(value.sellQuantity) + '</td>' +
                 '<td>' + formatPrice(value.buyTotalPrice) + '<br />' + formatPrice(value.sellTotalPrice) + '</td>' +
-                '<td colspan="2">' + formatPrice(profit) + ' </td>' +
+                '<td>' + formatPrice(profit) + ' </td>' +
+                '<td>' + getProfitPercentage(profit, value.buyTotalPrice) + ' </td>' +
                 '</tr>';
         });
         $('.table > tbody').prepend(toPrepend);
@@ -126,10 +124,23 @@ function getProfitLabel(isProfit) {
     return isProfit ? 'Profit' : 'Loss';
 }
 
+function getColor(isProfit) {
+    return isProfit ? "green" : "magenta";
+}
+
 function getProfitEntry(profit) {
     let isProfit = profit > 0;
-    let color = isProfit ? "green" : "magenta";
+    let color = getColor(isProfit);
     return '<span class="' + color + ' ng-binding ng-scope">' + getProfitLabel(isProfit) + '</span>';
+}
+
+function getProfitPercentage(profit, buyPrice) {
+    let isProfit = profit > 0;
+    if (profit == 0 || buyPrice == 0) {
+        return 'N/A';
+    }
+    let color = getColor(isProfit);
+    return '<span class="' + color + ' ng-binding ng-scope">' + formatQuantity(profit * 100 / buyPrice) + '</span>';
 }
 
 function formatQuantity(quantity) {
