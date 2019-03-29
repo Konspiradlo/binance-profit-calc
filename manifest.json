@@ -10,8 +10,8 @@
   ],
   "manifest_version": 2,
   "icons":{
-  	"16": "binance-coin-logo.png",
-    "48": "binance-coin-logo.png",
-    "128": "binance-coin-logo.png"
+  	"16": "16.png",
+    "48": "48.png",
+    "128": "128.png"
   }
 }
